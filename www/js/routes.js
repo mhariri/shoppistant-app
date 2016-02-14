@@ -7,9 +7,9 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-      
-        
+
+
+
     .state('tabsController.addReceipt', {
       url: '/add_receipt',
       views: {
@@ -19,11 +19,11 @@ angular.module('app.routes', [])
         }
       }
     })
-        
-      
-    
-      
-        
+
+
+
+
+
     .state('tabsController.history', {
       url: '/history',
       views: {
@@ -33,19 +33,19 @@ angular.module('app.routes', [])
         }
       }
     })
-        
-      
-    
-      
+
+
+
+
     .state('tabsController', {
-      url: '/page7',
+      url: '/tabs',
       abstract:true,
       templateUrl: 'templates/tabsController.html'
     })
-      
+
     ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/page7/add_receipt');
+  $urlRouterProvider.otherwise('/tabs/add_receipt');
 
 });
