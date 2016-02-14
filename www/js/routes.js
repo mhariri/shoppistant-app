@@ -10,42 +10,42 @@ angular.module('app.routes', [])
 
 
 
-    .state('tabsController.addReceipt', {
-      url: '/add_receipt',
-      views: {
-        'tab4': {
-          templateUrl: 'templates/addReceipt.html',
-          controller: 'addReceiptCtrl'
-        }
+    .state('tabsController.receipts', {
+    url: '/receipts',
+    views: {
+      'tab4': {
+        templateUrl: 'templates/receipts.html',
+        controller: 'receiptsCtrl'
       }
-    })
+    }
+  })
 
 
 
 
 
-    .state('tabsController.history', {
-      url: '/history',
-      views: {
-        'tab5': {
-          templateUrl: 'templates/history.html',
-          controller: 'historyCtrl'
-        }
+  .state('tabsController.history', {
+    url: '/shoppingList',
+    views: {
+      'tab5': {
+        templateUrl: 'templates/shoppingList.html',
+        controller: 'shoppingListCtrl'
       }
-    })
+    }
+  })
 
 
 
 
-    .state('tabsController', {
-      url: '/tabs',
-      abstract:true,
-      templateUrl: 'templates/tabsController.html'
-    })
+  .state('tabsController', {
+    url: '/tabs',
+    abstract: true,
+    templateUrl: 'templates/tabsController.html'
+  })
 
-    ;
+  ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tabs/add_receipt');
+  $urlRouterProvider.otherwise('/tabs/receipts');
 
 });
