@@ -10,6 +10,7 @@ We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to cre
 To run the app on your phone, use:
 
 ```bash
+$ cordova platform add ios
 $ ionic run ios --device
 ```
 
