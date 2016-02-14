@@ -1,7 +1,7 @@
 Shoppistant App
 =====================
 
-Alaways have your receipts just one click away! Organize, search and even re-print your receipts.
+Always have your receipts just one click away! Organize, search and even re-print your receipts.
 
 ## How to run?
 
