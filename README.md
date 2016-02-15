@@ -10,6 +10,7 @@ You'll need [Ionic CLI](https://github.com/driftyco/ionic-cli) to build and run 
 To run the app on your iPhone, use:
 
 ```bash
+$ ionic state reset
 $ ionic platform add ios
 $ ionic run ios --device
 ```
