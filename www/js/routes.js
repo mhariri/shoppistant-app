@@ -34,6 +34,16 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('tabsController.recommendations', {
+    url: '/recommendations',
+    views: {
+      'tab6': {
+        templateUrl: 'templates/recommendations.html',
+        controller: 'recommendationsCtrl'
+      }
+    }
+  })
+
 
 
 

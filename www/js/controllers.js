@@ -13,3 +13,7 @@ angular.module('app.controllers', [])
 .controller('shoppingListCtrl', function($scope) {
 
 })
+
+.controller('recommendationsCtrl', function($scope) {
+
+})
