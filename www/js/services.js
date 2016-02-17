@@ -3,22 +3,20 @@ angular.module('app.services', [])
 
   return {
     getPicture: function() {
-      var options = {
-                  quality : 75,
-                  destinationType : Camera.DestinationType.DATA_URL,
-                  sourceType : Camera.PictureSourceType.CAMERA,
-                  allowEdit : false,
-                  encodingType: Camera.EncodingType.JPEG,
-                  // targetWidth: 300,
-                  // targetHeight: 300,
-                  popoverOptions: CameraPopoverOptions,
-                  saveToPhotoAlbum: false
-              };
       var q = $q.defer();
-
       if(navigator.camera) {
+          var options = {
+                      quality : 75,
+                      destinationType : Camera.DestinationType.FILE_URI,
+                      sourceType : Camera.PictureSourceType.CAMERA,
+                      allowEdit : false,
+                      encodingType: Camera.EncodingType.JPEG,
+                      // targetWidth: 300,
+                      // targetHeight: 300,
+                      popoverOptions: CameraPopoverOptions,
+                      saveToPhotoAlbum: false
+                  };
         navigator.camera.getPicture(function(result) {
-          // Do any magic you need
           q.resolve(result);
         }, function(err) {
           q.reject(err);
@@ -31,8 +29,33 @@ angular.module('app.services', [])
     }
   }
 }])
-.factory('BlankFactory', [function(){
+.factory('ReceiptsService', ['$q', '$http', function($q, $http){
+    return  {
+        addPicture: function(imageUri, progressCallback) {
+            var q = $q.defer();
+            if(typeof FileTransfer !== "undefined") {
+                var ft = new FileTransfer();
+                ft.upload("http://shoppistant.appspot.com/v1/receipts", imageUri)
+                  .then(function(result) {
+                    // Success!
+                    q.resolve(result);
 
+                  }, function(err) {
+                    // Error
+                    q.reject(err);
+                }, progressCallback);
+            }else{
+                window.setTimeout(function() {
+                    q.resolve();
+                }, 3000);
+            }
+          return q.promise;
+
+      },
+      getReceipts: function() {
+          return $http.get("http://shoppistant.appspot.com/v1/receipts");
+    }
+  };
 }])
 
 .service('BlankService', [function(){

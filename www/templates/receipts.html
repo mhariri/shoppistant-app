@@ -1,66 +1,25 @@
 <ion-view title="">
   <ion-nav-buttons side="right">
-    <button class="button" ng-click="getPhoto()">
+    <button class="button" ng-click="addReceipt()">
       <i class="icon ion-ios-camera"></i> Upload
     </button>
   </ion-nav-buttons>
-  <ion-content overflow-scroll="true" padding="true" class="has-header">
-
+  <ion-content class="has-header">
+      <ion-refresher pulling-text="Pull to refresh" on-refresh="refreshReceipts()">
+      </ion-refresher>
     <ion-list>
-      <ion-item>(Uploading)</ion-item>
-      <ion-item>
-        <p>Hemkop -------------- Yesterday</p>
-        <div class="card">
-            <div class="item item-text-wrap">
-            <img src="img/sample_receipt.jpg" width="100%">
-          </div>
+      <ion-item ng-if="isUploading">(Uploading)</ion-item>
+      <ion-item ng-repeat="receipt in receipts" >
+        <div ng-click="receipt.active=!receipt.active;">
+            <span>{{receipt.title}}</span>
+            <span class="item-note">{{receipt.date | amCalendar}}</span>
+            <div class="card" ng-if="receipt.active">
+                <div class="item item-text-wrap">
+                    <img ng-src="{{receipt.image}}" width="100%">
+                </div>
+            </div>
         </div>
 
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Feb 14
-      </ion-item>
-      <ion-item>
-        Ikea ---------------- Feb 10
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Feb 9
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Feb 8
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Feb 2
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Jan 12
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Jan 12
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Jan 12
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Jan 12
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Jan 12
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Jan 12
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Jan 12
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Jan 12
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Jan 12
-      </ion-item>
-      <ion-item>
-        Hemkop -------------- Jan 12
       </ion-item>
     </ion-list>
   </ion-content>
