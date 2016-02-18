@@ -63,4 +63,93 @@ angular.module('app.services', [])
           return $http.get("http://shoppistant.appspot.com/v1/recommendations");
     }
   };
+}])
+.factory('ShoppingList', ['$q', '$localStorage', 'ShoppingListItem',
+    function($q, $localStorage, ShoppingListItem){
+        var shoppingList = Array.prototype.map.call(
+                                $localStorage.getObject("shoppingList")
+                                .values || [],
+                                ShoppingListItem.fromJson);
+        var service = {
+          add: function(name) {
+              var s = ShoppingListItem.from(name);
+              s.setObserver(this);
+              shoppingList.push(s);
+              this.onChange();
+          },
+          get: function() {
+              return shoppingList;
+          },
+          remove: function(item) {
+              shoppingList.splice(shoppingList.indexOf(item), 1);
+          },
+          onChange: function() {
+              $localStorage.setObject("shoppingList",
+                {"values": shoppingList.map(ShoppingListItem.toJson)});
+          }
+        };
+        // observe changes of shopping list items
+        shoppingList.forEach(function(i) {
+            i.setObserver(this);
+        }, service);
+
+        return service;
+}])
+.factory('$localStorage', ['$window', function($window) {
+  return {
+    set: function(key, value) {
+      $window.localStorage[key] = value;
+    },
+    get: function(key, defaultValue) {
+      return $window.localStorage[key] || defaultValue;
+    },
+    setObject: function(key, value) {
+      $window.localStorage[key] = JSON.stringify(value);
+    },
+    getObject: function(key) {
+      return JSON.parse($window.localStorage[key] || '{}');
+    }
+  }
+}])
+.factory('ShoppingListItem', ['$http', function($http) {
+    function ShoppingListItem(name, checked) {
+        this._name = name;
+        this._checked = checked || false;
+    };
+
+    ShoppingListItem.prototype = {
+      checked: function(value) {
+          if(arguments.length) {
+              this._checked = value;
+              this.notify();
+          }
+          return this._checked;
+      },
+      name: function(value) {
+          if(arguments.length) {
+              this._name = value;
+              this.notify();
+          }
+          return this._name;
+      },
+      setObserver: function(observer) {
+          this._observer = observer;
+      },
+      notify: function() {
+          if(this._observer) {
+              this._observer.onChange();
+          }
+      }
+  };
+  return {
+      from: function(name) {
+          return new ShoppingListItem(name);
+      },
+      fromJson: function(json) {
+          return new ShoppingListItem(json.name, json.checked);
+      },
+      toJson: function(item) {
+          return {'name': item.name(), 'checked': item.checked()};
+      }
+  };
 }]);

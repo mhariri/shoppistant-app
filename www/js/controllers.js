@@ -33,11 +33,17 @@ angular.module('app.controllers', [])
   $scope.refreshReceipts();
 })
 
-.controller('shoppingListCtrl', function($scope) {
-
+.controller('shoppingListCtrl', function($scope, ShoppingList) {
+    $scope.getShoppingList = function() { return ShoppingList.get(); };
+    $scope.clearChecked = function() {
+        ShoppingList.get()
+            .filter(function(i) { return i.checked()})
+            .forEach(function(i) { ShoppingList.remove(i); });
+    }
 })
 
-.controller('recommendationsCtrl', function($scope, RecommendationsService) {
+.controller('recommendationsCtrl', function($scope, RecommendationsService,
+                                            ShoppingList) {
     $scope.refreshRecommendations = function() {
       RecommendationsService.getRecommendations().then(function(response) {
           $scope.recommendations = response.data;
@@ -45,5 +51,8 @@ angular.module('app.controllers', [])
 
       });
     };
+    $scope.addToShoppingList = function(name) {
+        ShoppingList.add(name);
+    }
     $scope.refreshRecommendations();
 })

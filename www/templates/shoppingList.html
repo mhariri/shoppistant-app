@@ -1,18 +1,16 @@
 <ion-view title="">
   <ion-nav-buttons side="right">
-    <button class="button">
-      <i class="icon ion-ios-camera"></i> Clear checked
+    <button class="button" ng-click="clearChecked()">
+      <i class="icon ion-ios-trash-outline"></i> Clear checked
     </button>
   </ion-nav-buttons>
   <ion-content overflow-scroll="true" padding="true" class="has-header">
     <ion-list>
-      <ion-checkbox>Milk</ion-checkbox>
-      <ion-checkbox>Bread</ion-checkbox>
-      <ion-checkbox>Avocado</ion-checkbox>
-      <ion-checkbox>Cake</ion-checkbox>
-      <ion-checkbox>Olives</ion-checkbox>
-      <ion-checkbox>Wrench</ion-checkbox>
-      <ion-checkbox>Shampoo</ion-checkbox>
+      <ion-checkbox ng-repeat="s in getShoppingList()"
+        ng-model="s.checked"
+        ng-model-options="{ getterSetter: true }">
+          {{s.name()}}
+      </ion-checkbox>
     </ion-list>
   </ion-content>
 </ion-view>
