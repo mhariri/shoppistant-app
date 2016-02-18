@@ -37,6 +37,13 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('recommendationsCtrl', function($scope) {
+.controller('recommendationsCtrl', function($scope, RecommendationsService) {
+    $scope.refreshRecommendations = function() {
+      RecommendationsService.getRecommendations().then(function(response) {
+          $scope.recommendations = response.data;
+          $scope.$broadcast('scroll.refreshComplete');
 
+      });
+    };
+    $scope.refreshRecommendations();
 })

@@ -1,32 +1,17 @@
 <ion-view title="">
   <ion-content overflow-scroll="true" padding="true" class="has-header">
 
-        <div class="card">
-            <div class="item item-text-wrap">
-            <p>Milk</p>
-          </div>
+        <div class="card" ng-repeat="rec in recommendations">
+            <a href="#" class="item item-text-wrap item-icon-right
+                    ng-class: ['item-balanced',
+                                'item-balanced',
+                                'item-balanced',
+                                'item-energized',
+                                'item-energized',
+                                'item-assertive'][rec.weight]">
+                {{rec.title}}
+                <i class="icon ion-compose"></i>
+            </a>
         </div>
-        <div class="card">
-            <div class="item item-text-wrap">
-            <p>Butter</p>
-          </div>
-        </div>
-        <div class="card">
-            <div class="item item-text-wrap">
-            <p>Bread</p>
-          </div>
-        </div>
-        <div class="card">
-            <div class="item item-text-wrap">
-            <p>Potato</p>
-          </div>
-        </div>
-        <div class="card">
-            <div class="item item-text-wrap">
-            <p>Shalgham</p>
-          </div>
-        </div>
-
-
   </ion-content>
 </ion-view>

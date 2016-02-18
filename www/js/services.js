@@ -57,7 +57,10 @@ angular.module('app.services', [])
     }
   };
 }])
-
-.service('BlankService', [function(){
-
+.factory('RecommendationsService', ['$q', '$http', function($q, $http){
+    return  {
+      getRecommendations: function() {
+          return $http.get("http://shoppistant.appspot.com/v1/recommendations");
+    }
+  };
 }]);
