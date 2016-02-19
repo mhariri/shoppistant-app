@@ -39,7 +39,12 @@ angular.module('app.controllers', [])
         ShoppingList.get()
             .filter(function(i) { return i.checked()})
             .forEach(function(i) { ShoppingList.remove(i); });
-    }
+    };
+    $scope.addNewItem = function() {
+        ShoppingList.add($scope.newItem.name);
+        $scope.newItem.name = "";
+    };
+    $scope.newItem = {name:""};
 })
 
 .controller('recommendationsCtrl', function($scope, RecommendationsService,

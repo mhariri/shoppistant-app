@@ -5,12 +5,25 @@
     </button>
   </ion-nav-buttons>
   <ion-content overflow-scroll="true" padding="true" class="has-header">
-    <ion-list>
+    <ion-list >
       <ion-checkbox ng-repeat="s in getShoppingList()"
         ng-model="s.checked"
         ng-model-options="{ getterSetter: true }">
           {{s.name()}}
       </ion-checkbox>
+
+
+      <label class="item item-checkbox item-stable item-input-wrapper">
+          <div class="checkbox checkbox-input-hidden">
+              <i class="checkbox-icon"></i>
+          </div>
+          <div class="item-content">
+              <form ng-submit="addNewItem()">
+                  <input type="text" placeholder="Click to add"
+                    ng-model="newItem.name" style="background:transparent">
+            </form>
+          </div>
+      </label>
     </ion-list>
   </ion-content>
 </ion-view>

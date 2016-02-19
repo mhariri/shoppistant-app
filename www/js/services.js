@@ -82,6 +82,7 @@ angular.module('app.services', [])
           },
           remove: function(item) {
               shoppingList.splice(shoppingList.indexOf(item), 1);
+              this.onChange();
           },
           onChange: function() {
               $localStorage.setObject("shoppingList",
