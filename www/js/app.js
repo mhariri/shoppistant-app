@@ -25,5 +25,8 @@ angular.module('app',
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    // taken from http://ionicframework.com/docs/api/page/keyboard/ not to hide headers
+    cordova.plugins.Keyboard.disableScroll(true)
   });
 })

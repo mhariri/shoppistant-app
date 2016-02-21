@@ -1,4 +1,12 @@
 {
   "name": "Shoppistant",
-  "app_id": "com.shoppistant.apps"
+  "app_id": "com.shoppistant.apps",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }

@@ -33,16 +33,24 @@ angular.module('app.controllers', [])
   $scope.refreshReceipts();
 })
 
-.controller('shoppingListCtrl', function($scope, ShoppingList) {
+.controller('shoppingListCtrl', function($scope, ShoppingList, $ionicScrollDelegate) {
     $scope.getShoppingList = function() { return ShoppingList.get(); };
     $scope.clearChecked = function() {
         ShoppingList.get()
             .filter(function(i) { return i.checked()})
             .forEach(function(i) { ShoppingList.remove(i); });
     };
+    $scope.hideKeyboard = function() {
+      cordova.plugins.Keyboard.close();
+    };
     $scope.addNewItem = function() {
+      if($scope.newItem.name.length == 0) {
+        $scope.hideKeyboard();
+      } else {
         ShoppingList.add($scope.newItem.name);
         $scope.newItem.name = "";
+        $ionicScrollDelegate.scrollBottom();
+      }
     };
     $scope.newItem = {name:""};
 })
