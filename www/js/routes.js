@@ -56,6 +56,6 @@ angular.module('app.routes', [])
   ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tabs/receipts');
+  $urlRouterProvider.otherwise('/tabs/shoppingList');
 
 });
