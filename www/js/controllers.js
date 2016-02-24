@@ -24,7 +24,11 @@ angular.module('app.controllers', [])
     ReceiptsService.getReceipts().then(function(response) {
         $scope.receipts = response.data;
         for(receipt in $scope.receipts) {
-            $scope.receipts[receipt].date = new Date($scope.receipts[receipt].date);
+            $scope.receipts[receipt].date =
+                    new Date($scope.receipts[receipt].date ||
+                            $scope.receipts[receipt].added);
+            $scope.receipts[receipt].title =
+                $scope.receipts[receipt].title || "(Processing)"
         }
         $scope.$broadcast('scroll.refreshComplete');
 

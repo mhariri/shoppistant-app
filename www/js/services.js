@@ -44,16 +44,21 @@ angular.module('app.services', [])
         addPicture: function(imageUri, progressCallback) {
             var q = $q.defer();
             if(typeof FileTransfer !== "undefined") {
+                var options = new FileUploadOptions();
+                options.fileKey = "image";
+                options.fileName = imageUri.substr(imageUri.lastIndexOf('/') + 1);
+                options.mimeType = "image/jpeg";
                 var ft = new FileTransfer();
-                ft.upload(RECEIPTS_URL, imageUri)
-                  .then(function(result) {
+                ft.onProgress = progressCallback;
+                ft.upload(imageUri, RECEIPTS_URL,
+                  function(result) {
                     // Success!
                     q.resolve(result);
 
                   }, function(err) {
                     // Error
                     q.reject(err);
-                }, progressCallback);
+                }, options);
             }else{
                 var fd = new FormData();
                 fd.append('image', imageUri);
