@@ -9,6 +9,7 @@ angular.module('app.controllers', [])
 
       }).then(function() {
           $scope.isUploading = false;
+          $scope.refreshReceipts();
 
       }, function(err) {
           $scope.isUploading = false;
