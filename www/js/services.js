@@ -2,6 +2,10 @@ angular.module('app.services', [])
 .constant('BACKEND', window.location.search.indexOf("local") < 0 ?
                         "https://shoppistant.appspot.com" :
                         "http://localhost:8080")
+.constant('DEVICE_ID', window.localStorage["DEVICE_ID"] ||
+    // random id generator
+    (window.localStorage["DEVICE_ID"]=[0,0,0].map(function(){return Math.random().toString(36).substring(2);}).join(""))
+)
 .factory('Camera', ['$q', function($q) {
 
   return {
@@ -32,8 +36,8 @@ angular.module('app.services', [])
   }
 }])
 .factory('ReceiptsService',
-    ['$q', '$http', 'BACKEND', function($q, $http, BACKEND){
-    var RECEIPTS_URL = BACKEND + "/v1/receipts";
+    ['$q', '$http', 'BACKEND', 'DEVICE_ID', function($q, $http, BACKEND, DEVICE_ID){
+    var RECEIPTS_URL = BACKEND + "/v1/receipts?device_id=" + DEVICE_ID;
     return  {
         addPicture: function(imageUri, progressCallback) {
             var q = $q.defer();
@@ -76,10 +80,10 @@ angular.module('app.services', [])
     }
   };
 }])
-.factory('RecommendationsService', ['$q', '$http', function($q, $http){
+.factory('RecommendationsService', ['$q', '$http', 'DEVICE_ID', function($q, $http, DEVICE_ID){
     return  {
       getRecommendations: function() {
-          return $http.get("http://shoppistant.appspot.com/v1/recommendations");
+          return $http.get("http://shoppistant.appspot.com/v1/recommendations?device_id=" + DEVICE_ID);
     }
   };
 }])
