@@ -80,10 +80,11 @@ angular.module('app.services', [])
     }
   };
 }])
-.factory('RecommendationsService', ['$q', '$http', 'DEVICE_ID', function($q, $http, DEVICE_ID){
+.factory('RecommendationsService', ['$q', '$http', 'BACKEND', 'DEVICE_ID', function($q, $http, BACKEND, DEVICE_ID){
+    var RECOMMENDATIONS_URL = BACKEND + "/v1/recommendations?device_id=" + DEVICE_ID;
     return  {
       getRecommendations: function() {
-          return $http.get("http://shoppistant.appspot.com/v1/recommendations?device_id=" + DEVICE_ID);
+          return $http.get(RECOMMENDATIONS_URL);
     }
   };
 }])
