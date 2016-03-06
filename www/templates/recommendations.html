@@ -1,17 +1,25 @@
 <ion-view title="">
   <ion-content overflow-scroll="true" padding="true" class="has-header">
 
-        <div class="card" ng-repeat="rec in recommendations">
-            <a href="#" class="item item-text-wrap item-icon-right
-                    ng-class: ['item-balanced',
-                                'item-balanced',
-                                'item-balanced',
-                                'item-energized',
-                                'item-energized',
-                                'item-assertive'][rec.weight]">
-                {{rec.title}}
-                <i class="icon ion-compose" ng-click="addToShoppingList(rec.title)"></i>
-            </a>
-        </div>
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="refreshRecommendations()">
+    </ion-refresher>
+    <div class="card" ng-show="recommendations.length == 0">
+      <div class="item item-text-wrap item-calm">
+        You'll get a shopping checklist in here when you upload receipts,
+        so you'll never go out of milk again!
+      </div>
+    </div>
+    <div class="card" ng-repeat="rec in recommendations">
+        <a href="#" class="item item-text-wrap item-icon-right
+                ng-class: ['item-balanced',
+                            'item-balanced',
+                            'item-balanced',
+                            'item-energized',
+                            'item-energized',
+                            'item-assertive'][rec.weight]">
+            {{rec.title}}
+            <i class="icon ion-compose" ng-click="addToShoppingList(rec.title)"></i>
+        </a>
+    </div>
   </ion-content>
 </ion-view>

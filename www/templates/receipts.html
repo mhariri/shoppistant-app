@@ -5,8 +5,13 @@
     </button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-      <ion-refresher pulling-text="Pull to refresh" on-refresh="refreshReceipts()">
-      </ion-refresher>
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="refreshReceipts()">
+    </ion-refresher>
+    <div class="card" ng-show="receipts.length == 0">
+      <div class="item item-text-wrap item-calm">
+        Upload your receipts to get recommendations for your smart shopping list!
+      </div>
+    </div>
     <ion-list>
       <ion-item ng-if="isUploading">(Uploading)</ion-item>
       <ion-item ng-repeat="receipt in receipts" >
