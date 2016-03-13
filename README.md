@@ -17,5 +17,12 @@ $ ionic run ios --device
 
 For Android, replace ios in the command above with 'android'.
 
+## How to release?
+
+   change config.xml and bump up the version
+
+   ionic build --release android
+   jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../../shoppistant-app/release-key.jks platforms/android/build/outputs/apk/android-release-unsigned.apk "shoppistant android release key"
+   $ANDROID_HOME/build-tools/21.1.1/zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk shoppistant.apk
 ## Issues
 Please report any issues to: https://github.com/shoppistant/shoppistant-app/issues
